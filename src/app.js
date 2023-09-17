@@ -12,14 +12,16 @@ server.use(express.static(__dirname + '/public'))
 
 server.get('/',(req, res) => {
 //   res.send('server started')
-    res.render('index', {title:'Titulo dinamico del index'})
+    res.render('index', {title:'Home'}) //Titlutlo dinamico
 })
 
 server.get('/service', (req, res) => {
 //   res.send('Page service')
-    res.render('service', {title: 'Titulo dinamico de service'})
-}
+    res.render('service', {title: 'Service'}) //Titlutlo dinamico
+})
 
-)
+server.use((req, res, next) => {
+    res.status(404).render('404', {title:'404', description:'Page Not found'})
+})
 
 module.exports = server
