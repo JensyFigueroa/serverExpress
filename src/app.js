@@ -1,4 +1,5 @@
 const express = require('express')
+const routes = require('./routes/index.js')
 
 const server = express()
 
@@ -10,15 +11,17 @@ server.set('views', __dirname + '/views')
 server.use(express.static(__dirname + '/public'))
 
 
-server.get('/',(req, res) => {
-//   res.send('server started')
-    res.render('index', {title:'Home'}) //Titlutlo dinamico
-})
+// server.get('/',(req, res) => {
+// //   res.send('server started')
+//     res.render('index', {title:'Home'}) //Titlutlo dinamico
+// })
 
-server.get('/service', (req, res) => {
-//   res.send('Page service')
-    res.render('service', {title: 'Service'}) //Titlutlo dinamico
-})
+// server.get('/service', (req, res) => {
+// //   res.send('Page service')
+//     res.render('service', {title: 'Service'}) //Titlutlo dinamico
+// })
+
+server.use(routes);
 
 server.use((req, res, next) => {
     res.status(404).render('404', {title:'404', description:'Page Not found'})
