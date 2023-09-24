@@ -1,0 +1,24 @@
+<%- include('template/head.ejs', {titleWeb:title})%>
+
+<div class="container">
+  <h1><%= title %></h1>
+  <form action="/pets" method="POST">
+    <input
+      name="name"
+      type="text"
+      placeholder="Type name pet"
+      class="form-control my-2"
+    />
+    <input
+      name="description"
+      type="text"
+      placeholder="Description name pet"
+      class="form-control my-2"
+    />
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-success btn-block">Add</button>
+    </div>
+  </form>
+</div>
+
+<%- include('template/footer.ejs') %>

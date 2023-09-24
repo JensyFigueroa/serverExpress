@@ -11,11 +11,9 @@ const getService = (req, res) => {
 };
 
 const getPets = async (req, res) => {
-  //   res.send('Page service')
-
   try {
     const arrayPetsDB = await Pet.find();
-    console.log(arrayPetsDB)
+    // console.log(arrayPetsDB)
 
     res.render("pets", {
       arrayPets: arrayPetsDB
@@ -30,8 +28,13 @@ const getPets = async (req, res) => {
   }
 };
 
+const getCreate = (req, res) =>{
+  res.render("create", {title:"Create new pet"})
+}
+
 module.exports = {
   getHome,
   getService,
   getPets,
+  getCreate
 };

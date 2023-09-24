@@ -1,12 +1,9 @@
 const {Router} = require('express');
 
-const {getHome, getService, getPets } = require('../controllers/getControllers.js')
+const {getHome, getService } = require('../controllers/getControllers.js')
+const getRouter = Router();
 
-const getRoutes = Router();
+getRouter.get('/', getHome)
+getRouter.get('/service', getService)
 
-getRoutes.get('/', getHome)
-getRoutes.get('/service', getService)
-getRoutes.get('/pets', getPets)
-
-
-module.exports = getRoutes;
+module.exports = getRouter;
