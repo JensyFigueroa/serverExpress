@@ -9,7 +9,7 @@ const {USER, PASSWORD, DBNAME} = process.env
 // const dbname = 'vet'
 const uri = `mongodb+srv://${USER}:${PASSWORD}@cluster0.4rgxytc.mongodb.net/${DBNAME}?retryWrites=true&w=majority";`;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, w: 'majority', })
 .then(() => console.log('connected database...')
 )
 .catch(e =>  console.log(e))

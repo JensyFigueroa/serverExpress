@@ -21,12 +21,14 @@
             </thead>
             <tbody>
                 <% if (arrayPets.length> 0 ) { %> 
-                    <% arrayPets.forEach(pet=> { %>
+                    <% arrayPets.map((pet,index)=> { %>
                         <tr>
-                            <th scope="row"><%= pet.id %></th>
+                            <th scope="row"><%= index + 1%></th>
                             <td><%= pet.name %></td>
                             <td><%= pet.description %></td>
-                            <td>Delete</td>
+                            <td>
+                                <a href="/pets/<%= pet.id %>" class="btn btn-info">Edit</a>
+                            </td>
                         </tr>
                     <% }) %>
                 <% } %>

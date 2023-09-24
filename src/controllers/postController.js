@@ -6,7 +6,7 @@ const postCreate = async (req, res) => {
   // res.redirect('/pets');
 
   try {
-      res.redirect(   '/pets');
+      res.redirect('/pets');
       // const petDB = new Pet(body); // 1era Metodo
       // await petDB.save(); // 1era Metodo
     await Pet.create(body) //2do Metodo
