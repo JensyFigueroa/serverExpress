@@ -79,6 +79,32 @@ const deletePet = async (req, res) => {
 }
 
 
+const updatePet = async (req, res) => {
+  const _id = req.params.id
+  const body = req.body
+
+  try {
+    const petUpdate = await Pet.findByIdAndUpdate(_id, body, {useFindAndModify:false})
+
+    if (petUpdate) {
+      res.json({
+        state:true,
+        message: 'It was modified correctly'
+      })  
+    } else {
+      res.json({
+        state:false,
+        message: 'It was not modified correctly'
+      })
+    }
+
+  } catch (error) {
+    console.log('Update error', error)
+  }
+}
+
+
+
 
 module.exports = {
   getHome,
@@ -86,5 +112,6 @@ module.exports = {
   getPets,
   getCreate,
   getPetId,
-  deletePet
+  deletePet,
+  updatePet
 };

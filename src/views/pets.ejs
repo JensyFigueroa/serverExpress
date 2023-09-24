@@ -4,30 +4,30 @@
 
         <h1>CRUD with MongoDB</h1>
 
-        <div class="d-grid gap-2 mt-4 mb-4">
-            <a href="/pets/create" class="btn btn-success">
+        <!-- <div class="d-grid gap-2 mt-4 mb-4"> -->
+            <a href="/pets/create" class="btn btn-success mt-4 mb-4" style="--bs-btn-padding-x: 2rem">
                 create new Pet
             </a>
-        </div>
+        <!-- </div> -->
 
         <table class="table">
             <thead>
                 <tr class="table-primary">
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" style="width: 10%; text-align: center;">#</th>
+                    <th scope="col" style="width: 25%; text-align: center;">Name</th>
+                    <th scope="col" style="width: 50%; text-align: center;">Description</th>
+                    <th scope="col" style="width: 15%; text-align: center;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <% if (arrayPets.length> 0 ) { %> 
                     <% arrayPets.map((pet,index)=> { %>
-                        <tr>
+                        <tr style="text-align: center;">
                             <th scope="row"><%= index + 1%></th>
                             <td><%= pet.name %></td>
-                            <td><%= pet.description %></td>
+                            <td style="text-align:justify ;"><%= pet.description %></td>
                             <td>
-                                <a href="/pets/<%= pet.id %>" class="btn btn-info">Edit</a>
+                                <a href="/pets/<%= pet.id %>" class="btn btn-info">Detail</a>
                             </td>
                         </tr>
                     <% }) %>

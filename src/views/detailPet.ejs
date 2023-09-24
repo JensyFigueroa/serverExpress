@@ -12,59 +12,82 @@
             <a href="/pets" class="btn btn-dark">Back</a>
             <% } %>
                 <% if (!error) { %>
-                    <table class="table">
-                        <thead>
-                            <tr class="table-primary">
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <%= pet.id %>
-                                </th>
-                                <td>
-                                    <%= pet.name %>
-                                </td>
-                                <td>
-                                    <%= pet.description %>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm" id="btnDelete" data-id="<%= pet.id %>">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <form id="formEdit" data-id="<%= pet.id %>">
+
+                        <input type="text" class="form-control my-2" name="name" value="<%= pet.name %>" id="name"  />
+
+                        <input type="text" class="form-control my-2" name="description" value="<%= pet.description %>" id="description"  />
+
+
+                        <div class="mt-4 mb-4">
+                            <button type="submit" class="btn btn-warning btn-sm" style="--bs-btn-padding-x: 2rem">Edit</button>
+                            <button class="btn btn-danger btn-sm"  style="--bs-btn-padding-x: 2rem" id="btnDelete" data-id="<%= pet.id %>">
+                                Delete
+                            </button>
+                        </div>
+                    </form>
+
                     <% } %>
-                        <a href="/pets" class="btn btn-dark">Back</a>
+                        <a href="/pets" class="btn btn-dark" style="--bs-btn-padding-x: 5.25rem">Back</a>
     </div>
 
     <%- include('template/footer.ejs') %>
 
         <script>
             const btnDelete = document.querySelector("#btnDelete");
-            
+            const formEdit = document.getElementById("formEdit");
+
             btnDelete.addEventListener("click", async () => {
                 //   console.log('click in delete')
                 const id = btnDelete.dataset.id;
                 //   console.log(id)
 
                 try {
-                    const data = await fetch(`/pets/${id}`, { method: 'delete' });
+                    //hace la consulta y asi se ejecuta en el getController
+                    const data = await fetch(`/pets/${id}`, { method: "delete" });
                     const res = await data.json();
-                    console.log(res)
+                    console.log(res);
                     if (res.state) {
-                        window.location.href='/pets'
-                    }else{
-                        console.log(res)
+                        window.location.href = "/pets";
+                    } else {
+                        console.log(res);
                     }
                 } catch (error) {
                     console.log(error);
                 }
             });
+
+            formEdit.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                // console.log('submit')
+
+                // 2 form 
+                const name = formEdit.elements['name'].value //1era Form
+                const description = document.querySelector('#description').value//2da Form
+                const id = formEdit.dataset.id
+
+                try {
+                    // hace la consulta y asi se ejecuta en el getController
+                    const data = await fetch(`/pets/${id}`,
+                        {
+                            method: 'put',
+                            headers: { 'Content-type': 'application/json' },
+                            body: JSON.stringify({ name, description }),
+                        }
+                    )
+
+                    const res = await data.json()
+
+                    if (res.state) {
+                        window.location.href = "/pets";
+                    } else {
+                        console.log(res)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+
+            }
+            )   
         </script>
